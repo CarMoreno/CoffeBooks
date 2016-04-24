@@ -37,6 +37,9 @@ public class LogicaLibro implements LogicaLibroLocal {
             if(miLibro.getTitulo() == null){
                 throw new Exception("El titulo del libro es obligatorio");
             }
+            if(miLibro.getIdEditor() == null){
+                throw new Exception("El editor del libro es obligatorio");
+            }
         }
         
         Libro objLibro = libroDAO.find(miLibro.getIdLibro());
@@ -68,6 +71,9 @@ public class LogicaLibro implements LogicaLibroLocal {
             if(miLibro.getTitulo() == null){
                 throw new Exception("El titulo del libro es obligatorio");
             }
+            if(miLibro.getIdEditor() == null){
+                throw new Exception("El editor del libro es obligatorio");
+            }
         }
         Libro objLibro = libroDAO.find(miLibro.getIdLibro());
         if(objLibro == null){
@@ -78,6 +84,7 @@ public class LogicaLibro implements LogicaLibroLocal {
             miLibro.setFechaPublicacion(miLibro.getFechaPublicacion());
             miLibro.setTitulo(miLibro.getTitulo());
             miLibro.setPortada(miLibro.getPortada());
+            miLibro.setIdEditor(miLibro.getIdEditor());
             libroDAO.edit(miLibro);
         }
     }
