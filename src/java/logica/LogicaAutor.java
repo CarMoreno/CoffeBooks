@@ -9,7 +9,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import modelo.Autor;
-import persistencia.AutorFacade;
+import persistencia.AutorFacadeLocal;
 
 /**
  *
@@ -19,7 +19,7 @@ import persistencia.AutorFacade;
 public class LogicaAutor implements LogicaAutorLocal {
 
     @EJB
-    AutorFacade autorDAO;
+    private AutorFacadeLocal autorDAO;
     @Override
     public void registrarAutor(Autor miAutor) throws Exception {
         if(miAutor == null){

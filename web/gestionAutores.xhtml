@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>CoffeeBooks</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="north" size="50" resizable="true" closable="true" collapsible="true">
+                    <div align="center"><h:outputText value="Coffee Books" /></div>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" size="50" closable="true" collapsible="true">
+                    <div align="center">&copy; 2016 
+                        <a href="http://carmoreno.github.io" target="_blank">Carlos Moreno</a>
+                    </div>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="175" header="Ocultar" collapsible="true">
+                    <h:form>
+                        <p:menu>
+                            <p:submenu label="Recursos">
+                                    <p:menuitem value="Libros" url="gestionLibros.xhtml" />
+                                    <p:menuitem value="Autores" url="gestionAutores.xhtml" />
+                                    <p:menuitem value="Editores" url="gestionEditores.xhtml" />
+                            </p:submenu>
+
+                        </p:menu>
+                    </h:form>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                    <h:form id="form">
+                        <p:growl id="msgs" showDetail="true" />  <!--Para los mensajes-->  
+                                      
+                        <p:panelGrid columns="6">
+                            <h:outputText value="Identificador" />
+                            <p:inputText id="txtNumero" binding="#{autorVista.id}" />
+                            
+                            <h:outputText value="Nombre" />
+                            <p:inputText id="txtNombre" binding="#{autorVista.nombre}" />
+                            
+                            <h:outputText value="Apellido" />
+                            <p:inputText id="txtApellido" binding="#{autorVista.apellido}" />
+                            
+                            <h:outputText value="Correo" />
+                            <p:inputText id="txtCorreo" binding="#{autorVista.email}" />
+                            
+                            
+                            <p:commandButton value="Registrar" binding="#{autorVista.registrar}" action="#{autorVista.action_registrar()}" update="form" />
+                            <p:commandButton value="Modificar" binding="#{autorVista.modificar}" action="#{autorVista.action_modificar()}" update="form" />
+                            <p:commandButton value="Eliminar" binding="#{autorVista.eliminar}" action="#{autorVista.action_eliminar()}" update="form" />
+                            <p:commandButton value="Limpiar" binding="#{autorVista.limpiar}" action="#{autorVista.limpiar()}" update="form" />
+                        </p:panelGrid>
+                        <p:dataTable id="eventsDT" var="autor" value="#{autorVista.listaAutores}" selectionMode="single" selection="#{autorVista.selectedAutores}" rowKey="#{autor.idAutor}">
+                            <f:facet name="header">
+                                Autores
+                            </f:facet>
+                            <p:ajax event="rowSelect" listener="#{autorVista.onRowSelect}" update=":form" />
+                            <p:column headerText="Número">
+                                <h:outputText value="#{autor.idAutor}" />
+                            </p:column>
+                            <p:column headerText="Nombre">
+                                <h:outputText value="#{autor.nombre}" />
+                            </p:column>
+                            <p:column headerText="Apellido">
+                                <h:outputText value="#{autor.apellido}" />
+                            </p:column>
+                            <p:column headerText="Correo">
+                                <h:outputText value="#{autor.email}" />
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+                </p:layoutUnit>
+
+            </p:layout>
+
+        </h:body>
+
+    </f:view>
+</html>
+

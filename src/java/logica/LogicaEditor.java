@@ -9,7 +9,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import modelo.Editor;
-import persistencia.EditorFacade;
+import persistencia.EditorFacadeLocal;
 
 /**
  *
@@ -19,7 +19,7 @@ import persistencia.EditorFacade;
 public class LogicaEditor implements LogicaEditorLocal {
 
     @EJB
-    EditorFacade editorDAO;
+    private EditorFacadeLocal editorDAO;
     @Override
     public void registrarEditor(Editor miEditor) throws Exception {
         if(miEditor == null){
